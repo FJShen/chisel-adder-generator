@@ -1,0 +1,5 @@
+package adder
+
+class SimpleAdder {
+  
+}

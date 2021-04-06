@@ -1,0 +1,36 @@
+[
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~CLA|CLA>io_pg",
+    "sources":[
+      "~CLA|CLA>io_p"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~CLA|CLA>io_c_out",
+    "sources":[
+      "~CLA|CLA>io_gg",
+      "~CLA|CLA>io_c_in",
+      "~CLA|CLA>io_pg",
+      "~CLA|CLA>io_g",
+      "~CLA|CLA>io_p"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~CLA|CLA>io_gg",
+    "sources":[
+      "~CLA|CLA>io_g",
+      "~CLA|CLA>io_p"
+    ]
+  },
+  {
+    "class":"firrtl.EmitCircuitAnnotation",
+    "emitter":"firrtl.SystemVerilogEmitter"
+  },
+  {
+    "class":"firrtl.transforms.BlackBoxTargetDirAnno",
+    "targetDir":"."
+  }
+]
