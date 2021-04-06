@@ -1,0 +1,35 @@
+[
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~full_adder|full_adder>io_s",
+    "sources":[
+      "~full_adder|full_adder>io_c",
+      "~full_adder|full_adder>io_a",
+      "~full_adder|full_adder>io_b"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~full_adder|full_adder>io_g",
+    "sources":[
+      "~full_adder|full_adder>io_a",
+      "~full_adder|full_adder>io_b"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~full_adder|full_adder>io_p",
+    "sources":[
+      "~full_adder|full_adder>io_a",
+      "~full_adder|full_adder>io_b"
+    ]
+  },
+  {
+    "class":"firrtl.EmitCircuitAnnotation",
+    "emitter":"firrtl.SystemVerilogEmitter"
+  },
+  {
+    "class":"firrtl.transforms.BlackBoxTargetDirAnno",
+    "targetDir":"."
+  }
+]
