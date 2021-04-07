@@ -23,6 +23,12 @@ object Main extends App {
   /* val sv_code = (new ChiselStage).emitSystemVerilog(new GCD)
     println(sv_code)*/
 
-    val sv_code2:String = (new ChiselStage).emitSystemVerilog((new CLA(4)))
-    println(sv_code2)
+    val sv_code_full_adder:String = (new ChiselStage).emitSystemVerilog((new FullAdder))
+    println(sv_code_full_adder)
+
+    val sv_code_cla:String = (new ChiselStage).emitSystemVerilog((new CLA(3)))
+    println(sv_code_cla)
+
+    val sv_code_adder:String = (new ChiselStage).emitSystemVerilog((new SimpleAdder(3)))
+    println(sv_code_adder)
 }

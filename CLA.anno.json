@@ -3,26 +3,56 @@
     "class":"firrtl.transforms.CombinationalPath",
     "sink":"~CLA|CLA>io_pg",
     "sources":[
-      "~CLA|CLA>io_p"
+      "~CLA|CLA>io_p_2",
+      "~CLA|CLA>io_p_0",
+      "~CLA|CLA>io_p_1"
     ]
   },
   {
     "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~CLA|CLA>io_c_out",
+    "sink":"~CLA|CLA>io_c_out_1",
     "sources":[
-      "~CLA|CLA>io_gg",
+      "~CLA|CLA>io_g_1",
+      "~CLA|CLA>io_c_out_0",
+      "~CLA|CLA>io_p_1",
+      "~CLA|CLA>io_g_0",
       "~CLA|CLA>io_c_in",
-      "~CLA|CLA>io_pg",
-      "~CLA|CLA>io_g",
-      "~CLA|CLA>io_p"
+      "~CLA|CLA>io_p_0"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~CLA|CLA>io_c_out_2",
+    "sources":[
+      "~CLA|CLA>io_g_2",
+      "~CLA|CLA>io_c_out_1",
+      "~CLA|CLA>io_p_2",
+      "~CLA|CLA>io_g_1",
+      "~CLA|CLA>io_c_out_0",
+      "~CLA|CLA>io_p_1",
+      "~CLA|CLA>io_g_0",
+      "~CLA|CLA>io_c_in",
+      "~CLA|CLA>io_p_0"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~CLA|CLA>io_c_out_0",
+    "sources":[
+      "~CLA|CLA>io_g_0",
+      "~CLA|CLA>io_c_in",
+      "~CLA|CLA>io_p_0"
     ]
   },
   {
     "class":"firrtl.transforms.CombinationalPath",
     "sink":"~CLA|CLA>io_gg",
     "sources":[
-      "~CLA|CLA>io_g",
-      "~CLA|CLA>io_p"
+      "~CLA|CLA>io_g_2",
+      "~CLA|CLA>io_p_2",
+      "~CLA|CLA>io_g_1",
+      "~CLA|CLA>io_g_0",
+      "~CLA|CLA>io_p_1"
     ]
   },
   {
