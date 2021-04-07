@@ -3,69 +3,66 @@ circuit SimpleAdder :
   module CLA : 
     input clock : Clock
     input reset : Reset
-    output io : {flip c_in : UInt<1>, flip p : UInt<1>[3], flip g : UInt<1>[3], c_out : UInt<1>[3], pg : UInt<1>, gg : UInt<1>}
+    output io : {flip c_in : UInt<1>, c_out : UInt<1>, pg : UInt<1>, gg : UInt<1>, cpg : {carry : UInt<1>, flip p : UInt<1>, flip g : UInt<1>}[3]}
     
-    node _io_pg_T = and(io.p[0], io.p[1]) @[CLA.scala 17:26]
-    node _io_pg_T_1 = and(_io_pg_T, io.p[2]) @[CLA.scala 17:26]
-    io.pg <= _io_pg_T_1 @[CLA.scala 17:9]
-    node _io_gg_T = and(io.g[0], io.p[1]) @[CLA.scala 20:8]
-    node _io_gg_T_1 = or(_io_gg_T, io.g[1]) @[CLA.scala 20:16]
-    node _io_gg_T_2 = and(_io_gg_T_1, io.p[2]) @[CLA.scala 20:8]
-    node _io_gg_T_3 = or(_io_gg_T_2, io.g[2]) @[CLA.scala 20:16]
-    io.gg <= _io_gg_T_3 @[CLA.scala 19:9]
-    node _io_c_out_0_T = and(io.c_in, io.p[0]) @[CLA.scala 23:27]
-    node _io_c_out_0_T_1 = or(_io_c_out_0_T, io.g[0]) @[CLA.scala 23:38]
-    io.c_out[0] <= _io_c_out_0_T_1 @[CLA.scala 23:15]
-    node _io_c_out_1_T = and(io.c_out[0], io.p[1]) @[CLA.scala 25:39]
-    node _io_c_out_1_T_1 = or(_io_c_out_1_T, io.g[1]) @[CLA.scala 25:52]
-    io.c_out[1] <= _io_c_out_1_T_1 @[CLA.scala 25:19]
-    node _io_c_out_2_T = and(io.c_out[1], io.p[2]) @[CLA.scala 25:39]
-    node _io_c_out_2_T_1 = or(_io_c_out_2_T, io.g[2]) @[CLA.scala 25:52]
-    io.c_out[2] <= _io_c_out_2_T_1 @[CLA.scala 25:19]
-    node _T = asUInt(reset) @[CLA.scala 28:9]
-    node _T_1 = eq(_T, UInt<1>("h00")) @[CLA.scala 28:9]
-    when _T_1 : @[CLA.scala 28:9]
-      printf(clock, UInt<1>(1), "pg=%d, gg=%d, c_out=Vec(%d, %d, %d)", io.pg, io.gg, io.c_out[0], io.c_out[1], io.c_out[2]) @[CLA.scala 28:9]
-      skip @[CLA.scala 28:9]
+    node _io_pg_T = and(UInt<1>("h01"), io.cpg[0].p) @[CLA.scala 19:47]
+    node _io_pg_T_1 = and(_io_pg_T, io.cpg[1].p) @[CLA.scala 19:47]
+    node _io_pg_T_2 = and(_io_pg_T_1, io.cpg[2].p) @[CLA.scala 19:47]
+    io.pg <= _io_pg_T_2 @[CLA.scala 19:9]
+    node _io_gg_T = and(io.cpg[0].g, io.cpg[1].p) @[CLA.scala 25:8]
+    node _io_gg_T_1 = or(_io_gg_T, io.cpg[1].g) @[CLA.scala 25:15]
+    node _io_gg_T_2 = and(_io_gg_T_1, io.cpg[2].p) @[CLA.scala 25:8]
+    node _io_gg_T_3 = or(_io_gg_T_2, io.cpg[2].g) @[CLA.scala 25:15]
+    io.gg <= _io_gg_T_3 @[CLA.scala 24:9]
+    node _io_c_out_T = and(io.c_in, io.pg) @[CLA.scala 28:24]
+    node _io_c_out_T_1 = or(_io_c_out_T, io.gg) @[CLA.scala 28:33]
+    io.c_out <= _io_c_out_T_1 @[CLA.scala 28:12]
+    io.cpg[0].carry <= io.c_in @[CLA.scala 30:19]
+    node _io_cpg_1_carry_T = and(io.cpg[0].carry, io.cpg[0].p) @[CLA.scala 32:47]
+    node _io_cpg_1_carry_T_1 = or(_io_cpg_1_carry_T, io.cpg[0].g) @[CLA.scala 32:66]
+    io.cpg[1].carry <= _io_cpg_1_carry_T_1 @[CLA.scala 32:23]
+    node _io_cpg_2_carry_T = and(io.cpg[1].carry, io.cpg[1].p) @[CLA.scala 32:47]
+    node _io_cpg_2_carry_T_1 = or(_io_cpg_2_carry_T, io.cpg[1].g) @[CLA.scala 32:66]
+    io.cpg[2].carry <= _io_cpg_2_carry_T_1 @[CLA.scala 32:23]
     
   module FullAdder : 
     input clock : Clock
     input reset : Reset
-    output io : {flip a : UInt<1>, flip b : UInt<1>, flip c : UInt<1>, s : UInt<1>, p : UInt<1>, g : UInt<1>}
+    output io : {flip a : UInt<1>, flip b : UInt<1>, s : UInt<1>, flip cpg : {carry : UInt<1>, flip p : UInt<1>, flip g : UInt<1>}}
     
-    node _io_s_T = xor(io.a, io.b) @[FullAdder.scala 27:16]
-    node _io_s_T_1 = xor(_io_s_T, io.c) @[FullAdder.scala 27:23]
-    io.s <= _io_s_T_1 @[FullAdder.scala 27:8]
-    node _io_p_T = or(io.a, io.b) @[FullAdder.scala 28:16]
-    io.p <= _io_p_T @[FullAdder.scala 28:8]
-    node _io_g_T = and(io.a, io.b) @[FullAdder.scala 29:16]
-    io.g <= _io_g_T @[FullAdder.scala 29:8]
+    node _io_s_T = xor(io.a, io.b) @[FullAdder.scala 33:16]
+    node _io_s_T_1 = xor(_io_s_T, io.cpg.carry) @[FullAdder.scala 33:23]
+    io.s <= _io_s_T_1 @[FullAdder.scala 33:8]
+    node _io_cpg_p_T = or(io.a, io.b) @[FullAdder.scala 34:13]
+    io.cpg.p <= _io_cpg_p_T @[FullAdder.scala 34:5]
+    node _io_cpg_g_T = and(io.a, io.b) @[FullAdder.scala 35:13]
+    io.cpg.g <= _io_cpg_g_T @[FullAdder.scala 35:5]
     
   module FullAdder_1 : 
     input clock : Clock
     input reset : Reset
-    output io : {flip a : UInt<1>, flip b : UInt<1>, flip c : UInt<1>, s : UInt<1>, p : UInt<1>, g : UInt<1>}
+    output io : {flip a : UInt<1>, flip b : UInt<1>, s : UInt<1>, flip cpg : {carry : UInt<1>, flip p : UInt<1>, flip g : UInt<1>}}
     
-    node _io_s_T = xor(io.a, io.b) @[FullAdder.scala 27:16]
-    node _io_s_T_1 = xor(_io_s_T, io.c) @[FullAdder.scala 27:23]
-    io.s <= _io_s_T_1 @[FullAdder.scala 27:8]
-    node _io_p_T = or(io.a, io.b) @[FullAdder.scala 28:16]
-    io.p <= _io_p_T @[FullAdder.scala 28:8]
-    node _io_g_T = and(io.a, io.b) @[FullAdder.scala 29:16]
-    io.g <= _io_g_T @[FullAdder.scala 29:8]
+    node _io_s_T = xor(io.a, io.b) @[FullAdder.scala 33:16]
+    node _io_s_T_1 = xor(_io_s_T, io.cpg.carry) @[FullAdder.scala 33:23]
+    io.s <= _io_s_T_1 @[FullAdder.scala 33:8]
+    node _io_cpg_p_T = or(io.a, io.b) @[FullAdder.scala 34:13]
+    io.cpg.p <= _io_cpg_p_T @[FullAdder.scala 34:5]
+    node _io_cpg_g_T = and(io.a, io.b) @[FullAdder.scala 35:13]
+    io.cpg.g <= _io_cpg_g_T @[FullAdder.scala 35:5]
     
   module FullAdder_2 : 
     input clock : Clock
     input reset : Reset
-    output io : {flip a : UInt<1>, flip b : UInt<1>, flip c : UInt<1>, s : UInt<1>, p : UInt<1>, g : UInt<1>}
+    output io : {flip a : UInt<1>, flip b : UInt<1>, s : UInt<1>, flip cpg : {carry : UInt<1>, flip p : UInt<1>, flip g : UInt<1>}}
     
-    node _io_s_T = xor(io.a, io.b) @[FullAdder.scala 27:16]
-    node _io_s_T_1 = xor(_io_s_T, io.c) @[FullAdder.scala 27:23]
-    io.s <= _io_s_T_1 @[FullAdder.scala 27:8]
-    node _io_p_T = or(io.a, io.b) @[FullAdder.scala 28:16]
-    io.p <= _io_p_T @[FullAdder.scala 28:8]
-    node _io_g_T = and(io.a, io.b) @[FullAdder.scala 29:16]
-    io.g <= _io_g_T @[FullAdder.scala 29:8]
+    node _io_s_T = xor(io.a, io.b) @[FullAdder.scala 33:16]
+    node _io_s_T_1 = xor(_io_s_T, io.cpg.carry) @[FullAdder.scala 33:23]
+    io.s <= _io_s_T_1 @[FullAdder.scala 33:8]
+    node _io_cpg_p_T = or(io.a, io.b) @[FullAdder.scala 34:13]
+    io.cpg.p <= _io_cpg_p_T @[FullAdder.scala 34:5]
+    node _io_cpg_g_T = and(io.a, io.b) @[FullAdder.scala 35:13]
+    io.cpg.g <= _io_cpg_g_T @[FullAdder.scala 35:5]
     
   module SimpleAdder : 
     input clock : Clock
@@ -103,22 +100,17 @@ circuit SimpleAdder :
     node io_s_hi = cat(s_vec[2], s_vec[1]) @[SimpleAdder.scala 28:25]
     node _io_s_T = cat(io_s_hi, s_vec[0]) @[SimpleAdder.scala 28:25]
     io.s <= _io_s_T @[SimpleAdder.scala 28:10]
-    wire c_vec : UInt<1>[4] @[SimpleAdder.scala 30:21]
-    c_vec[0] <= io.c_in @[SimpleAdder.scala 31:14]
-    c_vec[1] <= cla_inst.io.c_out[0] @[SimpleAdder.scala 33:20]
-    c_vec[2] <= cla_inst.io.c_out[1] @[SimpleAdder.scala 33:20]
-    c_vec[3] <= cla_inst.io.c_out[2] @[SimpleAdder.scala 33:20]
-    io.c_out <= c_vec[3] @[SimpleAdder.scala 35:14]
-    cla_inst.io.c_in <= c_vec[0] @[SimpleAdder.scala 36:22]
-    adder_inst_0.io.c <= c_vec[0] @[SimpleAdder.scala 40:30]
-    adder_inst_1.io.c <= c_vec[1] @[SimpleAdder.scala 40:30]
-    adder_inst_2.io.c <= c_vec[2] @[SimpleAdder.scala 40:30]
-    cla_inst.io.p[0] <= adder_inst_0.io.p @[SimpleAdder.scala 44:28]
-    cla_inst.io.g[0] <= adder_inst_0.io.g @[SimpleAdder.scala 45:28]
-    cla_inst.io.p[1] <= adder_inst_1.io.p @[SimpleAdder.scala 44:28]
-    cla_inst.io.g[1] <= adder_inst_1.io.g @[SimpleAdder.scala 45:28]
-    cla_inst.io.p[2] <= adder_inst_2.io.p @[SimpleAdder.scala 44:28]
-    cla_inst.io.g[2] <= adder_inst_2.io.g @[SimpleAdder.scala 45:28]
-    io.pg <= cla_inst.io.pg @[SimpleAdder.scala 49:11]
-    io.gg <= cla_inst.io.gg @[SimpleAdder.scala 50:11]
+    cla_inst.io.cpg[0].g <= adder_inst_0.io.cpg.g @[SimpleAdder.scala 31:32]
+    cla_inst.io.cpg[0].p <= adder_inst_0.io.cpg.p @[SimpleAdder.scala 31:32]
+    adder_inst_0.io.cpg.carry <= cla_inst.io.cpg[0].carry @[SimpleAdder.scala 31:32]
+    cla_inst.io.cpg[1].g <= adder_inst_1.io.cpg.g @[SimpleAdder.scala 31:32]
+    cla_inst.io.cpg[1].p <= adder_inst_1.io.cpg.p @[SimpleAdder.scala 31:32]
+    adder_inst_1.io.cpg.carry <= cla_inst.io.cpg[1].carry @[SimpleAdder.scala 31:32]
+    cla_inst.io.cpg[2].g <= adder_inst_2.io.cpg.g @[SimpleAdder.scala 31:32]
+    cla_inst.io.cpg[2].p <= adder_inst_2.io.cpg.p @[SimpleAdder.scala 31:32]
+    adder_inst_2.io.cpg.carry <= cla_inst.io.cpg[2].carry @[SimpleAdder.scala 31:32]
+    cla_inst.io.c_in <= io.c_in @[SimpleAdder.scala 33:22]
+    io.c_out <= cla_inst.io.c_out @[SimpleAdder.scala 34:14]
+    io.pg <= cla_inst.io.pg @[SimpleAdder.scala 36:11]
+    io.gg <= cla_inst.io.gg @[SimpleAdder.scala 37:11]
     

@@ -10,7 +10,7 @@ import scala.math._
 class SimpleAdderSpec extends FlatSpec with ChiselScalatestTester with Matchers {
   behavior of "Simple adder"
 
-  val IT_Max = 10 //max number of random tests
+  val IT_Max = 1000 //max number of random tests
   val adder_bits = 4
   val max_input_value:Int = math.pow(2.toDouble, adder_bits).toInt
 

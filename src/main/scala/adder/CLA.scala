@@ -6,8 +6,6 @@ class CLA(amount_of_connected_full_adders: Int) extends MultiIOModule {
   val n = amount_of_connected_full_adders;
   val io = IO(new Bundle {
       val c_in = Input(Bool())
-      //val p = Input(Vec(n, Bool()))   //propagates from full adders
-      //val g = Input(Vec(n, Bool()))  //generates from full adders
       val c_out = Output(Bool())
       val pg = Output(Bool()) //group propagate
       val gg = Output(Bool()) //group generate

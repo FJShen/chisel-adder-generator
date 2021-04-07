@@ -19,10 +19,7 @@ class FullAdder extends MultiIOModule {
   val io = IO(new Bundle {
     val a = Input(UInt(1.W))
     val b = Input(UInt(1.W))
-    //val c = Input(Bool())  //carry-in
     val s = Output(UInt(1.W)) //sum
-    //val p = Output(Bool()) //propagate
-    //val g = Output(Bool()) //generate
     val cpg = Flipped(new CLALink)
   })
 
@@ -44,7 +41,7 @@ class FullAdder extends MultiIOModule {
   *
   */
 class CLALink extends Bundle{
-  val carry = Output(Bool())
+  val carry = Output(Bool()) //carry-in of FA
   val p = Input(Bool())
   val g = Input(Bool())
 }

@@ -28,9 +28,9 @@
     "class":"firrtl.transforms.CombinationalPath",
     "sink":"~SimpleAdder|SimpleAdder>io_s",
     "sources":[
-      "~SimpleAdder|SimpleAdder>io_c_in",
       "~SimpleAdder|SimpleAdder>io_a",
-      "~SimpleAdder|SimpleAdder>io_b"
+      "~SimpleAdder|SimpleAdder>io_b",
+      "~SimpleAdder|SimpleAdder>io_c_in"
     ]
   },
   {
