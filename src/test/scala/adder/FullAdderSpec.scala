@@ -18,9 +18,9 @@ class FullAdderSpec extends FlatSpec with ChiselScalatestTester with Matchers {
         dut.io.a.poke(a.asUInt(1.W))
         dut.io.b.poke(b.asUInt)
         dut.io.cpg.carry.poke(c.B)
-        println(
+        /*println(
           s"a=$a, b=$b, c=$c, s=${dut.io.s.peek}, p=${dut.io.cpg.p.peek}, g=${dut.io.cpg.g.peek}"
-        ) //, s=$c.io.s, p=$p, g=$g")
+        ) //, s=$c.io.s, p=$p, g=$g")*/
       }
     }
   }

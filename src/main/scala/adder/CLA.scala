@@ -14,12 +14,12 @@ class CLA(amount_of_connected_full_adders: Int) extends MultiIOModule {
   println(s"CLA instantiated with n=$n")
 
   //io.pg := io.p.reduce(_ & _) //pg = p0p1p2p3
-  io.pg := io.cpg.foldLeft(true.B){(a,b) => a & b.p}  //pg = p0p1p2p3
+  io.pg := io.cpg.foldLeft(true.B){case(a,b) => a & b.p}  //pg = p0p1p2p3
   
   /*io.gg :=  (io.p zip io.g).tail.foldLeft(io.g(0)){(a,b) =>
     (a & b._1) | b._2
   } //gg = g3 + p3g2 + p3p2g1 + p3p2p1g0*/
-  io.gg :=  io.cpg.tail.foldLeft(io.cpg(0).g){(a,b) =>
+  io.gg :=  io.cpg.tail.foldLeft(io.cpg(0).g){case(a,b) =>
     (a & b.p) | b.g
   } //gg = g3 + p3g2 + p3p2g1 + p3p2p1g0
 
