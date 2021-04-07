@@ -17,17 +17,13 @@ class FullAdderSpec extends FlatSpec with ChiselScalatestTester with Matchers {
       ) {
         dut.io.a.poke(a.asUInt(1.W))
         dut.io.b.poke(b.asUInt)
-        dut.io.c.poke(c.B)
+        dut.io.cpg.carry.poke(c.B)
         println(
-          s"a=$a, b=$b, c=$c, s=${dut.io.s.peek}, p=${dut.io.p.peek}, g=${dut.io.g.peek}"
+          s"a=$a, b=$b, c=$c, s=${dut.io.s.peek}, p=${dut.io.cpg.p.peek}, g=${dut.io.cpg.g.peek}"
         ) //, s=$c.io.s, p=$p, g=$g")
       }
     }
   }
 
-  behavior of "assembled four full adders plus CLA-4"
-  val n=3
-  it should "yield correct addition results" in {
-    //test() { dut => }
-  }
+
 }

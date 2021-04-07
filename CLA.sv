@@ -2,21 +2,23 @@ module CLA(
   input   clock,
   input   reset,
   input   io_c_in,
-  input   io_p_0,
-  input   io_p_1,
-  input   io_p_2,
-  input   io_g_0,
-  input   io_g_1,
-  input   io_g_2,
-  output  io_c_out_0,
-  output  io_c_out_1,
-  output  io_c_out_2,
+  output  io_c_out,
   output  io_pg,
-  output  io_gg
+  output  io_gg,
+  output  io_cpg_0_carry,
+  input   io_cpg_0_p,
+  input   io_cpg_0_g,
+  output  io_cpg_1_carry,
+  input   io_cpg_1_p,
+  input   io_cpg_1_g,
+  output  io_cpg_2_carry,
+  input   io_cpg_2_p,
+  input   io_cpg_2_g
 );
-  assign io_c_out_0 = io_c_in & io_p_0 | io_g_0; // @[CLA.scala 23:38]
-  assign io_c_out_1 = io_c_out_0 & io_p_1 | io_g_1; // @[CLA.scala 25:52]
-  assign io_c_out_2 = io_c_out_1 & io_p_2 | io_g_2; // @[CLA.scala 25:52]
-  assign io_pg = io_p_0 & io_p_1 & io_p_2; // @[CLA.scala 17:26]
-  assign io_gg = (io_g_0 & io_p_1 | io_g_1) & io_p_2 | io_g_2; // @[CLA.scala 20:16]
+  assign io_c_out = io_c_in & io_pg | io_gg; // @[CLA.scala 28:33]
+  assign io_pg = io_cpg_0_p & io_cpg_1_p & io_cpg_2_p; // @[CLA.scala 19:47]
+  assign io_gg = (io_cpg_0_g & io_cpg_1_p | io_cpg_1_g) & io_cpg_2_p | io_cpg_2_g; // @[CLA.scala 25:15]
+  assign io_cpg_0_carry = io_c_in; // @[CLA.scala 30:19]
+  assign io_cpg_1_carry = io_cpg_0_carry & io_cpg_0_p | io_cpg_0_g; // @[CLA.scala 32:66]
+  assign io_cpg_2_carry = io_cpg_1_carry & io_cpg_1_p | io_cpg_1_g; // @[CLA.scala 32:66]
 endmodule

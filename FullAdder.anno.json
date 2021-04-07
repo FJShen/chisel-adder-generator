@@ -1,25 +1,25 @@
 [
   {
     "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~FullAdder|FullAdder>io_cpg_p",
+    "sources":[
+      "~FullAdder|FullAdder>io_a",
+      "~FullAdder|FullAdder>io_b"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~FullAdder|FullAdder>io_cpg_g",
+    "sources":[
+      "~FullAdder|FullAdder>io_a",
+      "~FullAdder|FullAdder>io_b"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
     "sink":"~FullAdder|FullAdder>io_s",
     "sources":[
-      "~FullAdder|FullAdder>io_c",
-      "~FullAdder|FullAdder>io_a",
-      "~FullAdder|FullAdder>io_b"
-    ]
-  },
-  {
-    "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~FullAdder|FullAdder>io_g",
-    "sources":[
-      "~FullAdder|FullAdder>io_a",
-      "~FullAdder|FullAdder>io_b"
-    ]
-  },
-  {
-    "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~FullAdder|FullAdder>io_p",
-    "sources":[
+      "~FullAdder|FullAdder>io_cpg_carry",
       "~FullAdder|FullAdder>io_a",
       "~FullAdder|FullAdder>io_b"
     ]

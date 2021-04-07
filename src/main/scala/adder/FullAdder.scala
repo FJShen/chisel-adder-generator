@@ -1,6 +1,7 @@
 package adder
 
 import chisel3._
+import org.antlr.v4.runtime.misc.FlexibleHashMap
 
 /**
   * FullAdder
@@ -18,14 +19,32 @@ class FullAdder extends MultiIOModule {
   val io = IO(new Bundle {
     val a = Input(UInt(1.W))
     val b = Input(UInt(1.W))
-    val c = Input(Bool())  //carry-in
+    //val c = Input(Bool())  //carry-in
     val s = Output(UInt(1.W)) //sum
-    val p = Output(Bool()) //propagate
-    val g = Output(Bool()) //generate
+    //val p = Output(Bool()) //propagate
+    //val g = Output(Bool()) //generate
+    val cpg = Flipped(new CLALink)
   })
 
-  io.s := io.a ^ io.b ^ io.c;
-  io.p := io.a | io.b;
-  io.g := io.a & io.b;
+  val c = io.cpg.carry
+  val p = io.cpg.p
+  val g = io.cpg.g
 
+  io.s := io.a ^ io.b ^ c;
+  p := io.a | io.b;
+  g := io.a & io.b;
+
+}
+
+/**
+  * Link between a bare CLA module and a full adder,
+  * from the perspective of the CLA module (CLA module 
+  * provides (Output) the carries to FAs and receives (Input)
+  *  G and P from FAs)
+  *
+  */
+class CLALink extends Bundle{
+  val carry = Output(Bool())
+  val p = Input(Bool())
+  val g = Input(Bool())
 }

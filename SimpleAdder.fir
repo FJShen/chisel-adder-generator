@@ -22,6 +22,11 @@ circuit SimpleAdder :
     node _io_c_out_2_T = and(io.c_out[1], io.p[2]) @[CLA.scala 25:39]
     node _io_c_out_2_T_1 = or(_io_c_out_2_T, io.g[2]) @[CLA.scala 25:52]
     io.c_out[2] <= _io_c_out_2_T_1 @[CLA.scala 25:19]
+    node _T = asUInt(reset) @[CLA.scala 28:9]
+    node _T_1 = eq(_T, UInt<1>("h00")) @[CLA.scala 28:9]
+    when _T_1 : @[CLA.scala 28:9]
+      printf(clock, UInt<1>(1), "pg=%d, gg=%d, c_out=Vec(%d, %d, %d)", io.pg, io.gg, io.c_out[0], io.c_out[1], io.c_out[2]) @[CLA.scala 28:9]
+      skip @[CLA.scala 28:9]
     
   module FullAdder : 
     input clock : Clock

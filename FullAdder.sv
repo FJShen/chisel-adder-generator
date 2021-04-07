@@ -3,12 +3,12 @@ module FullAdder(
   input   reset,
   input   io_a,
   input   io_b,
-  input   io_c,
   output  io_s,
-  output  io_p,
-  output  io_g
+  input   io_cpg_carry,
+  output  io_cpg_p,
+  output  io_cpg_g
 );
-  assign io_s = io_a ^ io_b ^ io_c; // @[FullAdder.scala 27:23]
-  assign io_p = io_a | io_b; // @[FullAdder.scala 28:16]
-  assign io_g = io_a & io_b; // @[FullAdder.scala 29:16]
+  assign io_s = io_a ^ io_b ^ io_cpg_carry; // @[FullAdder.scala 33:23]
+  assign io_cpg_p = io_a | io_b; // @[FullAdder.scala 34:13]
+  assign io_cpg_g = io_a & io_b; // @[FullAdder.scala 35:13]
 endmodule
