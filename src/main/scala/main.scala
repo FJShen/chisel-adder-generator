@@ -35,7 +35,7 @@ object Main extends App {
     val sv_code_adder:String = (new ChiselStage).emitSystemVerilog((new SimpleAdder(3)))
     println(sv_code_adder)*/
 
-    val sv_code_cla_adder:String = (new ChiselStage).emitSystemVerilog((new CLAAdder(5)))
+    val sv_code_cla_adder:String = (new ChiselStage).emitSystemVerilog((new CLAAdder(6)))
     println(sv_code_cla_adder)
 
     /*val test:String = (new ChiselStage).emitSystemVerilog(new Foo)
