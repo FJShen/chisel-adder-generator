@@ -2,6 +2,7 @@ package adder
 
 import chisel3._
 import chisel3.util._
+import math._
 
 class CLAAdder(n: Int) extends MultiIOModule {
   val io = IO(new Bundle {
@@ -11,7 +12,7 @@ class CLAAdder(n: Int) extends MultiIOModule {
     val cpg = Flipped(new CLALink)
   })
 
-  val max_children = 4
+  val max_children = 4 //how many children a CLA (not CLAAdder) block can directly derive
 
   n match {
     case 1 => {
@@ -21,69 +22,41 @@ class CLAAdder(n: Int) extends MultiIOModule {
       fa_inst.io.s <> io.s 
       fa_inst.io.cpg <> io.cpg
     }
-    case x if (x > 1 && x <= max_children) => {
-      val cla_inst = Module(new CLA(n))
-      val adder_inst = Seq.fill(n)(Module(new CLAAdder(1)))
-
-      /* external connections */
-
-      //carry-in
-      cla_inst.io.c_in := io.cpg.carry
-
-      //sum outputs
-      val sum_bit_collector = Wire(Vec(n, UInt(1.W)))
-      adder_inst.map(_.io.s).zip(sum_bit_collector).foreach{case(x,y) => x<>y}
-      io.s := sum_bit_collector.asUInt()
-
-      //a and b
-      adder_inst.map(_.io.a).zip(io.a.asBools()).foreach{case(x,y)=> x<>y}
-      adder_inst.map(_.io.b).zip(io.b.asBools()).foreach{case(x,y)=> x<>y}
-
-      //group propagate and generate
-      io.cpg.p := cla_inst.io.pg
-      io.cpg.g := cla_inst.io.gg
-
-      /* interal connections */
-      for (idx <- 0 until n) {
-        adder_inst(idx).io.cpg <> cla_inst.io.cpg(idx)
-      }
-      adder_inst.map(_.io.cpg).zip(cla_inst.io.cpg).foreach{case(x,y)=> x<>y}
+    case x if (x < 1) => {
+      println("CLAAdder cannot have a bitwidht of less than one!")
     }
     case _ => {
+      //the following calculation aims to figure out how many direct children should the CLA block spawn
+      //the comments after the code demonstrates the fact that a 18-bit adder 
+      //will be dissected into 1*16 + 2
 
-      //how many children CLA to use?
-      val number_of_children_CLA = math.ceil(n.toDouble/max_children).toInt
-      
-      val cla_inst = Module(new CLA(number_of_children_CLA))
-      cla_inst.io.c_in <> io.cpg.carry
-      cla_inst.io.pg <> io.cpg.p
-      cla_inst.io.gg <> io.cpg.g
+      val tree_depth = floor(log(n)/log(max_children)).toInt //e.g. floor{log(18)/log(4)} = 2
+      val granularity = pow(max_children, tree_depth).toInt //e.g. 4^2 = 16
+      val num_whole_granularity_adders = n / granularity //e.g. 18 / 16 = 1
+      val leftover_adder_width = n % granularity  //e.g. 18%16 = 2
+      val num_adders = if(leftover_adder_width>0) 1+num_whole_granularity_adders else num_whole_granularity_adders
 
-      //how many bits are left unconnected?
-      val width_of_last_adder = n - 4 * (number_of_children_CLA-1)
-      val sum_collector = Wire(Vec(number_of_children_CLA-1, UInt(4.W)))
-      val last_adder_sum = Wire(UInt(width_of_last_adder.W))
+      val cla_inst = Module(new CLA(num_adders))
+      val whole_granularity_adders = Seq.fill(num_whole_granularity_adders)(Module(new CLAAdder(granularity)))
+      val leftover_adder = Module(new CLAAdder(leftover_adder_width)) //the leftover adder will map to the highest-index bits
 
-      val children_cla_adder_inst = Seq.fill(number_of_children_CLA-1)(Module(new CLAAdder(4)))
+      val sum_collector = Wire(Vec(num_whole_granularity_adders, UInt(granularity.W)))
+      val leftover_sum = Wire(UInt(leftover_adder_width.W))
 
-      //instantiate and connect all but the last adder
-      (0 until number_of_children_CLA-1).toList.map(4*_).zip(children_cla_adder_inst)
-      .foreach{case (idx, inst) =>
-        inst.io.a <> io.a(idx+3, idx)
-        inst.io.b <> io.b(idx+3, idx)
-        inst.io.s <> sum_collector(idx)
-        inst.io.cpg <> cla_inst.io.cpg(idx)
+      (0 until num_whole_granularity_adders).map(_*granularity).zip(whole_granularity_adders)
+      .foreach{case(idx, inst) =>
+        inst.io.a <> io.a(idx+granularity-1, idx)
+        inst.io.b <> io.b(idx+granularity-1, idx)
+        sum_collector(idx/granularity) := inst.io.s
+        inst.io.cpg <> cla_inst.io.cpg(idx/granularity)
       }
 
-      //instantiate and connect the last adder
-      val last_adder_inst = Module(new CLAAdder(width_of_last_adder))
-      last_adder_inst.io.a <> io.a(n-1, n-width_of_last_adder)
-      last_adder_inst.io.b <> io.b(n-1, n-width_of_last_adder)
-      last_adder_inst.io.s <> last_adder_sum
-      last_adder_inst.io.cpg <> cla_inst.io.cpg(number_of_children_CLA-1)
-
-      io.s <> Cat(last_adder_sum, sum_collector.asUInt)
-
+      leftover_adder.io.a <> io.a(n-1, n-leftover_adder_width)
+      leftover_adder.io.b <> io.b(n-1, n-leftover_adder_width)
+      leftover_sum := leftover_adder.io.s
+      cla_inst.io.cpg(num_adders - 1) <> leftover_adder.io.cpg
+      io.s := Cat(leftover_sum, sum_collector.asUInt())
+      
     }
   }
 }
