@@ -1,6 +1,9 @@
 import chisel3.stage._
 import gcd._
 import adder._
+import chisel3._
+import chisel3.util.MixedVec
+import javax.swing.plaf.synth.SynthUI
 
 object Main extends App {
 
@@ -32,7 +35,30 @@ object Main extends App {
     val sv_code_adder:String = (new ChiselStage).emitSystemVerilog((new SimpleAdder(3)))
     println(sv_code_adder)*/
 
-    val sv_code_cla_adder:String = (new ChiselStage).emitSystemVerilog((new CLAAdder(3)))
+    val sv_code_cla_adder:String = (new ChiselStage).emitSystemVerilog((new CLAAdder(5)))
     println(sv_code_cla_adder)
 
+    /*val test:String = (new ChiselStage).emitSystemVerilog(new Foo)
+    println(test)*/
+
+}
+ 
+/* Output will be 12'hf05 */
+class Foo extends MultiIOModule{
+  val io = IO(new Bundle{
+    val out = Output(UInt(12.W))
+  })
+
+  val vec = Wire(MixedVec(UInt(4.W), Vec(2, UInt(4.W))))
+  val subvec = Wire(Vec(2, UInt(4.W)))
+  vec(1) := subvec
+
+  vec(0) := 5.U(4.W)
+  subvec(0) := 0.U(4.W)
+  subvec(1) := 15.U(4.W)
+
+  io.out := vec.asUInt
+
+  println(s"${subvec.getClass()}")
+  println(s"${subvec(0).getClass()}")
 }
