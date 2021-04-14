@@ -35,8 +35,15 @@ object Main extends App {
     val sv_code_adder:String = (new ChiselStage).emitSystemVerilog((new SimpleAdder(3)))
     println(sv_code_adder)*/
 
-    val sv_code_cla_adder:String = (new ChiselStage).emitSystemVerilog((new CLAAdder(6, "Adder0")))
-    println(sv_code_cla_adder)
+    for(idx <- 32 to 32){
+      println((s"""
+      |
+      |ADDER WIDTH==$idx==
+      |""").stripMargin)
+      val sv_code_cla_adder:String = (new ChiselStage).emitSystemVerilog((new CLAAdder(idx, "Adder0")))
+    //println(sv_code_cla_adder)
+    }
+    
 
     /*val test:String = (new ChiselStage).emitSystemVerilog(new Foo)
     println(test)*/

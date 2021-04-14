@@ -33,49 +33,49 @@
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_8|FullAdder",
-    "duplicate":"~CLAAdder_8|CLAAdder_8/whole_granularity_adders_0:CLAAdder_4/adder_insts_0:CLAAdder/fa_inst:FullAdder",
+    "duplicate":"~CLAAdder_8|CLAAdder_8/whole_granularity_adders_0:CLAAdder_4/whole_granularity_adders_0:CLAAdder/fa_inst:FullAdder",
     "index":0.11764705882352941
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_8|CLAAdder",
-    "duplicate":"~CLAAdder_8|CLAAdder_8/whole_granularity_adders_0:CLAAdder_4/adder_insts_0:CLAAdder",
+    "duplicate":"~CLAAdder_8|CLAAdder_8/whole_granularity_adders_0:CLAAdder_4/whole_granularity_adders_0:CLAAdder",
     "index":0.17647058823529413
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_8|FullAdder_1",
-    "duplicate":"~CLAAdder_8|CLAAdder_8/whole_granularity_adders_0:CLAAdder_4/adder_insts_1:CLAAdder/fa_inst:FullAdder",
+    "duplicate":"~CLAAdder_8|CLAAdder_8/whole_granularity_adders_0:CLAAdder_4/whole_granularity_adders_1:CLAAdder/fa_inst:FullAdder",
     "index":0.23529411764705882
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_8|CLAAdder_1",
-    "duplicate":"~CLAAdder_8|CLAAdder_8/whole_granularity_adders_0:CLAAdder_4/adder_insts_1:CLAAdder",
+    "duplicate":"~CLAAdder_8|CLAAdder_8/whole_granularity_adders_0:CLAAdder_4/whole_granularity_adders_1:CLAAdder",
     "index":0.29411764705882354
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_8|FullAdder_2",
-    "duplicate":"~CLAAdder_8|CLAAdder_8/whole_granularity_adders_0:CLAAdder_4/adder_insts_2:CLAAdder/fa_inst:FullAdder",
+    "duplicate":"~CLAAdder_8|CLAAdder_8/whole_granularity_adders_0:CLAAdder_4/whole_granularity_adders_2:CLAAdder/fa_inst:FullAdder",
     "index":0.35294117647058826
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_8|CLAAdder_2",
-    "duplicate":"~CLAAdder_8|CLAAdder_8/whole_granularity_adders_0:CLAAdder_4/adder_insts_2:CLAAdder",
+    "duplicate":"~CLAAdder_8|CLAAdder_8/whole_granularity_adders_0:CLAAdder_4/whole_granularity_adders_2:CLAAdder",
     "index":0.4117647058823529
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_8|FullAdder_3",
-    "duplicate":"~CLAAdder_8|CLAAdder_8/whole_granularity_adders_0:CLAAdder_4/adder_insts_3:CLAAdder/fa_inst:FullAdder",
+    "duplicate":"~CLAAdder_8|CLAAdder_8/whole_granularity_adders_0:CLAAdder_4/whole_granularity_adders_3:CLAAdder/fa_inst:FullAdder",
     "index":0.47058823529411764
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_8|CLAAdder_3",
-    "duplicate":"~CLAAdder_8|CLAAdder_8/whole_granularity_adders_0:CLAAdder_4/adder_insts_3:CLAAdder",
+    "duplicate":"~CLAAdder_8|CLAAdder_8/whole_granularity_adders_0:CLAAdder_4/whole_granularity_adders_3:CLAAdder",
     "index":0.5294117647058824
   },
   {
@@ -87,25 +87,25 @@
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_8|FullAdder_4",
-    "duplicate":"~CLAAdder_8|CLAAdder_8/leftover_adder:CLAAdder_7/adder_insts_0:CLAAdder/fa_inst:FullAdder",
+    "duplicate":"~CLAAdder_8|CLAAdder_8/leftover_adder:CLAAdder_7/whole_granularity_adders_0:CLAAdder/fa_inst:FullAdder",
     "index":0.7058823529411765
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_8|CLAAdder_5",
-    "duplicate":"~CLAAdder_8|CLAAdder_8/leftover_adder:CLAAdder_7/adder_insts_0:CLAAdder",
+    "duplicate":"~CLAAdder_8|CLAAdder_8/leftover_adder:CLAAdder_7/whole_granularity_adders_0:CLAAdder",
     "index":0.7647058823529411
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_8|FullAdder_5",
-    "duplicate":"~CLAAdder_8|CLAAdder_8/leftover_adder:CLAAdder_7/adder_insts_1:CLAAdder/fa_inst:FullAdder",
+    "duplicate":"~CLAAdder_8|CLAAdder_8/leftover_adder:CLAAdder_7/whole_granularity_adders_1:CLAAdder/fa_inst:FullAdder",
     "index":0.8235294117647058
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_8|CLAAdder_6",
-    "duplicate":"~CLAAdder_8|CLAAdder_8/leftover_adder:CLAAdder_7/adder_insts_1:CLAAdder",
+    "duplicate":"~CLAAdder_8|CLAAdder_8/leftover_adder:CLAAdder_7/whole_granularity_adders_1:CLAAdder",
     "index":0.8823529411764706
   },
   {

@@ -27,37 +27,37 @@
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_3|FullAdder",
-    "duplicate":"~CLAAdder_3|CLAAdder_3/adder_inst_0:CLAAdder/fa_inst:FullAdder",
+    "duplicate":"~CLAAdder_3|CLAAdder_3/whole_granularity_adders_0:CLAAdder/fa_inst:FullAdder",
     "index":0.14285714285714285
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_3|CLAAdder",
-    "duplicate":"~CLAAdder_3|CLAAdder_3/adder_inst_0:CLAAdder",
+    "duplicate":"~CLAAdder_3|CLAAdder_3/whole_granularity_adders_0:CLAAdder",
     "index":0.2857142857142857
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_3|FullAdder_1",
-    "duplicate":"~CLAAdder_3|CLAAdder_3/adder_inst_1:CLAAdder/fa_inst:FullAdder",
+    "duplicate":"~CLAAdder_3|CLAAdder_3/whole_granularity_adders_1:CLAAdder/fa_inst:FullAdder",
     "index":0.42857142857142855
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_3|CLAAdder_1",
-    "duplicate":"~CLAAdder_3|CLAAdder_3/adder_inst_1:CLAAdder",
+    "duplicate":"~CLAAdder_3|CLAAdder_3/whole_granularity_adders_1:CLAAdder",
     "index":0.5714285714285714
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_3|FullAdder_2",
-    "duplicate":"~CLAAdder_3|CLAAdder_3/adder_inst_2:CLAAdder/fa_inst:FullAdder",
+    "duplicate":"~CLAAdder_3|CLAAdder_3/whole_granularity_adders_2:CLAAdder/fa_inst:FullAdder",
     "index":0.7142857142857143
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_3|CLAAdder_2",
-    "duplicate":"~CLAAdder_3|CLAAdder_3/adder_inst_2:CLAAdder",
+    "duplicate":"~CLAAdder_3|CLAAdder_3/whole_granularity_adders_2:CLAAdder",
     "index":0.8571428571428571
   },
   {

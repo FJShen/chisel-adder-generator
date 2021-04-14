@@ -27,61 +27,61 @@
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_6|FullAdder",
-    "duplicate":"~CLAAdder_6|CLAAdder_6/children_cla_adder_inst_0:CLAAdder_4/adder_inst_0:CLAAdder/fa_inst:FullAdder",
+    "duplicate":"~CLAAdder_6|CLAAdder_6/whole_granularity_adders_0:CLAAdder_4/whole_granularity_adders_0:CLAAdder/fa_inst:FullAdder",
     "index":0.15384615384615385
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_6|CLAAdder",
-    "duplicate":"~CLAAdder_6|CLAAdder_6/children_cla_adder_inst_0:CLAAdder_4/adder_inst_0:CLAAdder",
+    "duplicate":"~CLAAdder_6|CLAAdder_6/whole_granularity_adders_0:CLAAdder_4/whole_granularity_adders_0:CLAAdder",
     "index":0.23076923076923078
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_6|FullAdder_1",
-    "duplicate":"~CLAAdder_6|CLAAdder_6/children_cla_adder_inst_0:CLAAdder_4/adder_inst_1:CLAAdder/fa_inst:FullAdder",
+    "duplicate":"~CLAAdder_6|CLAAdder_6/whole_granularity_adders_0:CLAAdder_4/whole_granularity_adders_1:CLAAdder/fa_inst:FullAdder",
     "index":0.3076923076923077
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_6|CLAAdder_1",
-    "duplicate":"~CLAAdder_6|CLAAdder_6/children_cla_adder_inst_0:CLAAdder_4/adder_inst_1:CLAAdder",
+    "duplicate":"~CLAAdder_6|CLAAdder_6/whole_granularity_adders_0:CLAAdder_4/whole_granularity_adders_1:CLAAdder",
     "index":0.38461538461538464
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_6|FullAdder_2",
-    "duplicate":"~CLAAdder_6|CLAAdder_6/children_cla_adder_inst_0:CLAAdder_4/adder_inst_2:CLAAdder/fa_inst:FullAdder",
+    "duplicate":"~CLAAdder_6|CLAAdder_6/whole_granularity_adders_0:CLAAdder_4/whole_granularity_adders_2:CLAAdder/fa_inst:FullAdder",
     "index":0.46153846153846156
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_6|CLAAdder_2",
-    "duplicate":"~CLAAdder_6|CLAAdder_6/children_cla_adder_inst_0:CLAAdder_4/adder_inst_2:CLAAdder",
+    "duplicate":"~CLAAdder_6|CLAAdder_6/whole_granularity_adders_0:CLAAdder_4/whole_granularity_adders_2:CLAAdder",
     "index":0.5384615384615384
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_6|FullAdder_3",
-    "duplicate":"~CLAAdder_6|CLAAdder_6/children_cla_adder_inst_0:CLAAdder_4/adder_inst_3:CLAAdder/fa_inst:FullAdder",
+    "duplicate":"~CLAAdder_6|CLAAdder_6/whole_granularity_adders_0:CLAAdder_4/whole_granularity_adders_3:CLAAdder/fa_inst:FullAdder",
     "index":0.6153846153846154
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_6|CLAAdder_3",
-    "duplicate":"~CLAAdder_6|CLAAdder_6/children_cla_adder_inst_0:CLAAdder_4/adder_inst_3:CLAAdder",
+    "duplicate":"~CLAAdder_6|CLAAdder_6/whole_granularity_adders_0:CLAAdder_4/whole_granularity_adders_3:CLAAdder",
     "index":0.6923076923076923
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_6|FullAdder_4",
-    "duplicate":"~CLAAdder_6|CLAAdder_6/last_adder_inst:CLAAdder/fa_inst:FullAdder",
+    "duplicate":"~CLAAdder_6|CLAAdder_6/leftover_adder:CLAAdder/fa_inst:FullAdder",
     "index":0.8461538461538461
   },
   {
     "class":"firrtl.transforms.DedupedResult",
     "original":"~CLAAdder_6|CLAAdder_5",
-    "duplicate":"~CLAAdder_6|CLAAdder_6/last_adder_inst:CLAAdder",
+    "duplicate":"~CLAAdder_6|CLAAdder_6/leftover_adder:CLAAdder",
     "index":0.9230769230769231
   },
   {

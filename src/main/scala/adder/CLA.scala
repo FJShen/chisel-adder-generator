@@ -11,7 +11,7 @@ class CLA(amount_of_connected_full_adders: Int) extends MultiIOModule {
       val gg = Output(Bool()) //group generate
       val cpg = Vec(n, new CLALink)
   })
-  println(s"CLA instantiated with n=$n")
+  //println(s"CLA instantiated with n=$n")
 
   //io.pg := io.p.reduce(_ & _) //pg = p0p1p2p3
   io.pg := io.cpg.foldLeft(true.B){case(a,b) => a & b.p}  //pg = p0p1p2p3
